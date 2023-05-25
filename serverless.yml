@@ -1,0 +1,25 @@
+service: forbes-crypto-web-scrapper
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: ${opt:stage, 'tst'}
+  region: us-east-1
+  memorySize: 1024
+  timeout: 800
+  
+
+plugins:
+  - serverless-offline
+  
+functions:
+  fetchArticles:
+    handler: index.handler
+    environment:
+      STAGE: ${self:provider.stage}
+      QUEUE_URL: "https://sqs.us-east-1.amazonaws.com/832120222718/how-3-fetchArticles-${self:provider.stage}"
+    events:
+      - http:
+          path: /fetch-articles
+          method: get
+          cors: true
