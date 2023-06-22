@@ -19,13 +19,15 @@ async function fetchArticles() {
       articleId: uuid(),
       title,
       link,
-      translatedArticles: {},
+      imageURI: '',
+      translatedArticles: [],
       metadata: {
         articleSource: "forbes",
         articleBaseUrl: URL,
         articleTimeStampExtracted: Date.now(),
         category: "crypto-blockchain",
         author,
+        tags: '',
       },
     };
 
