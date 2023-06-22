@@ -1,3 +1,5 @@
+# This is readme file is old. Dont refer. 
+
 # Forbes Crypto Web Scraper
 
 This project is a web scraping application that fetches articles from the Forbes website and sends them to an AWS SQS queue for further processing.

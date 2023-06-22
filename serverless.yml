@@ -17,7 +17,6 @@ functions:
     handler: index.handler
     environment:
       STAGE: ${self:provider.stage}
-      QUEUE_URL: "https://sqs.us-east-1.amazonaws.com/832120222718/how-3-fetchArticles-${self:provider.stage}"
     events:
       - http:
           path: /fetch-articles
