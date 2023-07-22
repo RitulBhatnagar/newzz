@@ -28,6 +28,10 @@ async function fetchArticles() {
         category: "crypto-blockchain",
         author,
         tags: '',
+        articleMetrics: {
+          articleLiked: Math.floor(Math.random() * 20),
+          articleDisliked: 0,
+        },
       },
     };
 

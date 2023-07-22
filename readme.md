@@ -1,85 +1,121 @@
-# This is readme file is old. Dont refer. 
+# Forbes Web Scraper Service
 
-# Forbes Crypto Web Scraper
+Forbes Web Scraper is an AWS-based serverless application written in Node.js. This service scrapes information from the [Forbes Web3 portal](https://www.forbes.com/crypto-blockchain/) and returns the article data as a JSON response.
 
-This project is a web scraping application that fetches articles from the Forbes website and sends them to an AWS SQS queue for further processing.
+## Pre-requisites
 
-## Prerequisites
-
-- Node.js 14.x
-- AWS account
+- Node.js v14.x and npm (usually bundled with Node.js)
+- Configured AWS CLI with Admin privileges
 - Serverless Framework
 
-## Installation
+## Setup Instructions
 
-1. Clone the repository.
-2. Install the dependencies by running the following command:
+1. Install Serverless Framework globally:
 
-   ```bash
-   npm install
-   ```
+```bash
+npm install -g serverless
+```
+
+2. Install the project dependencies:
+
+```bash
+npm install
+```
+
+## Deployment Steps
+
+To deploy the service, execute:
+
+```bash
+sls deploy
+```
+
+Upon successful deployment, you should see an output similar to this:
+
+```bash
+Serverless: Stack update finished...
+Service Information
+service: Forbes-web-scrapper
+stage: tst
+region: us-east-1
+stack: Forbes-web-scrapper-tst
+resources: 10
+api keys:
+  None
+endpoints:
+  GET -  https://ybc2m4j3ml.execute-api.us-east-1.amazonaws.com/tst/fetch-articles
+functions:
+  fetchArticles: Forbes-web-scrapper-tst-fetchArticles
+layers:
+  None
+```
+
+## Running Tests
+
+Execute your tests locally using:
+
+```bash
+npm test
+```
 
 ## Usage
 
-To run the web scraping application locally, use the following command:
+Access your deployed service by making a GET request:
 
-- sls offline
-
-This will start the application on your local machine.
-
-## Deployment
-
-To deploy the application to AWS Lambda, use the following command:
-
-- sls deploy --stage <stage>
-
-Replace <stage> with the desired deployment stage (e.g., dev, prod).
-
-# Configuration
-
-Before deploying the application, make sure to configure the following environment variables:
-
-- QUEUE_URL: The URL of the AWS SQS queue where the articles will be sent.
-- STAGE: The deployment stage (default is tst).
-  These environment variables can be set in the serverless.yml file.
-
-## Endpoints
-
-The application provides the following endpoint:
-
-- GET /fetch-articles: Fetches articles from the Forbes website and sends them to the configured SQS queue.
-
-## Response Model
-
-The response from the /fetch-articles endpoint will have the following structure:
-
+```bash
+curl  https://ybc2m4j3ml.execute-api.us-east-1.amazonaws.com/tst/fetch-articles
+curl  https://xamx0jq4v0.execute-api.us-east-1.amazonaws.com/prd/fetch-articles
 ```
+
+The service will return a JSON object containing the scraped article data.
+
+## JSON Response Structure
+
+The `fetchArticles` function retrieves and processes data from each article found on the Forbes Web3 page. The article data is structured as follows:
+
+```json
 {
-  "message": "Sent <number> articles to queue"
-}
-```
-
-## Sample Response
-
-Here's an example of a sample response:
-
-```
-{
-    "articleId": "27470be4-2c1e-448d-bd1a-83771ad52504",
-    "title": "Cryptocurrency Bill Will Mitigate Key Risks For Web3 Investors, If It Can Pass",
-    "link": "https://www.forbes.com/sites/haileylennon/2022/06/09/cryptocurrency-bill-will-mitigate-key-risks-for-web3-investors-if-it-can-pass/",
-    "translatedArticles": {},
-    "metadata": {
-        "articleSource": "forbes",
-        "articleBaseUrl": "https://www.forbes.com/crypto-blockchain/",
-        "articleTimeStampExtracted": 1685045389981,
-        "category": "crypto-blockchain",
-        "author": "Hailey Lennon",
-        "articlePublishedOn": "Jun 9, 2022,01:01pm EDT",
-        "articleLastUpdatedOn": "N/A"
+  "articleId": "UUID",
+  "title": "Article title",
+  "link": "URL",
+  "imageURI": "Image URL",
+  "translatedArticles": {},
+  "metadata": {
+    "articleSource": "Forbes",
+    "articleBaseUrl": "Base URL",
+    "articleTimeStampExtracted": "Extraction timestamp",
+    "category": "Category",
+    "tags": "Tags",
+    "articleMetrics": {
+      "articleLiked": "Likes count",
+      "articleDisliked": "Dislikes count"
     },
-    "content": "Senator Cynthia Lummis, a Republican from Wyoming, ..."
+    "author": "Author Name",
+    "articlePublishedOn": "Publication Date",
+    "articleLastUpdatedOn": "Last Update Date"
+  },
+  "content": "Article content"
 }
 ```
 
-The response includes the articleId, title, link, translatedArticles, metadata, and content fields.
+## Clean Up
+
+To undeploy the service:
+
+```bash
+sls remove
+```
+
+## Contributing
+
+Contributions are welcome. Please fork the repository and create a pull request for any bug fixes, features or improvements.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE.md](LICENSE.md) file for details.
+
+## Credits
+
+Many thanks to Forbes for providing informative articles.
+
+**Disclaimer:** Ensure that your AWS credentials are correctly configured as per the [AWS CLI User guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html). The URLs and values provided in this README are for example purposes only. The provided code does not come with any guarantees or maintenance agreement.
