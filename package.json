@@ -1,0 +1,16 @@
+{
+  "name": "newsBackend",
+  "version": "1.0.0",
+  "author": "Ritul Bhatnagar",
+  "description": "",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.1",
+    "express": "^4.18.2",
+    "mongoose": "^8.1.1",
+    "serverless-http": "^3.1.1"
+  },
+  "devDependencies": {
+    "serverless-offline": "^13.3.3"
+  }
+}

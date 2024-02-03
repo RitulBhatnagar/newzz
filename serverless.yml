@@ -1,0 +1,36 @@
+service: newsBackend
+frameworkVersion: '3'
+
+custom:
+  stage: "${opt:stage, 'tst'}"
+  
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: ${self:custom.stage}
+  timeout: 850
+  memorySize: 1024
+  environment:
+  
+    STAGE: ${self:custom.stage}
+
+plugins:
+  - serverless-offline
+
+functions:
+  api:
+    handler: index.handler
+    events:
+      - http:
+          path: '/news/articles'
+          method: GET
+          cors: true
+      - http:
+          path: '/news/article'
+          method: GET
+          cors: true
+      - http:
+          path: '/news/getSources'
+          method: GET
+          cors: true
