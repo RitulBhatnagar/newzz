@@ -1,17 +1,21 @@
 const { fetchData, fetchArticleData } = require("./fetch");
 const uuid = require("uuid").v4;
 
-const URL = "https://www.forbes.com/crypto-blockchain/";
+const URL = "https://www.forbes.com/digital-assets/news/";
 async function fetchArticles() {
-  const $ = await fetchData(URL);
+  const $ = await fetchData(URL,{
+    headers: {
+      "User-Agent": "Chrome/51.0.2704.103",
+    },
+  });
   console.log("Homepage loaded. Extracting article links...");
   const articleLinks = [];
 
-  $("div._9VbVPOdt").each((i, element) => {
-    const title = $(element).find("h2.u00AMdzw span.ULACyEdG").text().trim();
-    const link = $(element).find("a.UZhxnK9k").attr("href");
+  $(".FeaturedNews_tabContainer__tSR6W .EditorsPicks_tabContent__YaCf9 .EditorsPicks_cardArticle__TUwzk").each((i, element) => {
+    const title = $(element).find(".wQwN2-r6 span").text().trim();
+    const link = $(element).find(".wQwN2-r6 a").attr("href");
     const author = $(element)
-      .find("div.-GPe57GX.Q5lCM4EP a._84Z--AMj")
+      .find(".wQwN2-r6 .-GPe57GX.Q5lCM4EP ._84Z--AMj")
       .text()
       .trim();
 
@@ -33,36 +37,13 @@ async function fetchArticles() {
           articleDisliked: 0,
         },
       },
-    };
+    }; 
+
+    console.log(article)
 
     articleLinks.push(article);
   });
 
-  $(".K9l0sXwD._48Nq31T2.Zci514UN.byline").each((index, element) => {
-    const $element = $(element);
-
-    const title = $element.find("h3.EKqpiIkt a._5ncu0TWl").text();
-    const author = $element
-      .find(".-GPe57GX.Q5lCM4EP.xeEyB3Bw a._84Z--AMj")
-      .text();
-    const link = $element.find("h3.EKqpiIkt a._5ncu0TWl").attr("href");
-
-    const article = {
-      articleId: uuid(),
-      title,
-      link,
-      translatedArticles: {},
-      metadata: {
-        articleSource: "forbes",
-        articleBaseUrl: URL,
-        articleTimeStampExtracted: Date.now(),
-        category: "crypto-blockchain",
-        author,
-      },
-    };
-
-    articleLinks.push(article);
-  });
 
   console.log(`${articleLinks.length} article links extracted.`);
 

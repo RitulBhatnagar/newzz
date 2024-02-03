@@ -94,7 +94,8 @@ The `fetchArticles` function retrieves and processes data from each article foun
     "articlePublishedOn": "Publication Date",
     "articleLastUpdatedOn": "Last Update Date"
   },
-  "content": "Article content"
+  "content": "Article content",
+  "subheading" : "Article SUbheading"
 }
 ```
 
