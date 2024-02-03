@@ -1,0 +1,24 @@
+{
+  "name": "decrypt-webscraping-tool",
+  "version": "1.0.0",
+  "description": "decrypt webscraping tool",
+  "main": "index.js",
+  "devDependencies": {
+    "serverless": "^2.52.0",
+    "serverless-offline": "^8.1.0"
+  },
+  "dependencies": {
+    "axios": "^1.4.0",
+    "cheerio": "^1.0.0-rc.12",
+    "sls": "^0.1.0",
+    "uuid": "^9.0.0"
+  },
+  "scripts": {
+    "local-start": "node index.js",
+    "start": "sls offline start",
+    "deploy:prd": "sls deploy --stage prd",
+    "deploy:tst": "sls deploy --stage tst"
+  },
+  "author": "Ritul Bhatnagar",
+  "license": "ISC"
+}
