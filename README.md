@@ -8,7 +8,7 @@ This project is a Serverless AWS Lambda function in Node.js serving as a News Ag
 
 Ensure Node.js and npm are installed. Clone the repository and run:
 
-```bash
+bash
 git clone <repository>
 cd <repository>
 npm install
