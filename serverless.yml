@@ -1,0 +1,24 @@
+service: blockworksScrapper
+
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  stage: ${opt:stage, 'tst'}
+  memorySize: 1024
+  timeout: 800
+
+plugins:
+  - serverless-offline
+
+functions:
+  api:
+    handler: index.handler
+    environment:
+      STAGE: ${self:provider.stage}
+    events:
+      - http:
+          path: /fetch-articles
+          method: get
+          cors: true
