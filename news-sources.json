@@ -1,0 +1,10 @@
+{
+    "tst": [
+       {
+        "fetchArticles" : "https://3zc6ntsotj.execute-api.us-east-1.amazonaws.com/tst/fetchArticles",
+        "decrypt" : "https://vuitk3vd78.execute-api.us-east-1.amazonaws.com/tst/fetch-articles",
+        "forbes" : "https://940kth7kzh.execute-api.us-east-1.amazonaws.com/tst/fetch-articles",
+        "blockworks" : "https://ky2a9rpjeg.execute-api.us-east-1.amazonaws.com/tst/fetch-articles"
+       }
+    ]
+}

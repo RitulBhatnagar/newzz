@@ -1,0 +1,20 @@
+service: newsCollector
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage : ${opt:stage, 'tst'}
+  timeout : 850
+
+plugins:
+  - serverless-offline
+functions:
+  api:
+    handler: index.handler
+    events:
+      - http:
+          path: /fetchArticles
+          method: get
+      - http:
+         path: /fetchFilteredArticles
+         method : get
